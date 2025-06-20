@@ -753,7 +753,7 @@ int main(int argc, char *argv[])
                 RunSequentialRawReadTest(64, 4, fullPass, 4, -1);
                 RunSequentialRawReadTest(64, 16, fullPass, 4, -1);
                 RunSequentialRawReadTest(64, 32, fullPass, 4, -1);
-                RunSequentialRawReadTest(64, 1024, fullPass, 4, -1);
+                RunSequentialRawReadTest(64, 512, fullPass, 4, -1);
 
                 // Print return message and handle input.
                 TestEndCommon();
@@ -767,7 +767,7 @@ int main(int argc, char *argv[])
                 RunRandomRawReadTest(6, 4, fullPass, 4, -1);
                 RunRandomRawReadTest(6, 16, fullPass, 4, -1);
                 RunRandomRawReadTest(6, 32, fullPass, 4, -1);
-                RunRandomRawReadTest(6, 1024, fullPass, 4, -1);
+                RunRandomRawReadTest(6, 256, fullPass, 4, -1);
 
                 // Print return message and handle input.
                 TestEndCommon();
@@ -779,7 +779,6 @@ int main(int argc, char *argv[])
                 RunSequentialRawReadTest(16, 4, 1, -1, -1);
                 RunSequentialRawReadTest(16, 16, 1, -1, -1);
                 RunSequentialRawReadTest(16, 32, 1, -1, -1);
-                RunSequentialRawReadTest(16, 1024, 1, -1, -1);
                 TestEndCommon();
                 break;
             }
@@ -789,13 +788,11 @@ int main(int argc, char *argv[])
                 RunRandomRawReadTest(6, 4, 1, -1, -1);
                 RunRandomRawReadTest(6, 16, 1, -1, -1);
                 RunRandomRawReadTest(6, 32, 1, -1, -1);
-                RunRandomRawReadTest(6, 1024, 1, -1, -1);
                 TestEndCommon();
                 break;
             }
             case SPEED_TEST_7: {
-                // Sequential raw read 512MB in 512kb blocks MDMA 0+ HDD->IOP
-                RunSequentialRawReadTest(512, 512, 0, 4, -1);
+                // Sequential raw read 512MB in 1024kb blocks MDMA 0+ HDD->IOP
                 RunSequentialRawReadTest(512, 1024, 0, 4, -1);
                 TestEndCommon();
                 break;
