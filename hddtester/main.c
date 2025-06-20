@@ -448,7 +448,7 @@ void RunSequentialRawReadTest(u32 sizeInMb, u32 blockSizeInKb, int fullpass, int
             // Refresh the identify data so we can get an accurate UDMA speed.
             fileXioDevctl(deviceString, ATA_DEVCTL_IDENTIFY, NULL, 0, &ata_identify_data, sizeof(ata_identify_data));
             u32 udmaModeUsed = GetSelectedUDMAMode();
-            if (udmaModeUsed != 0xFFFFFFFF) {
+            if ((udmaModeUsed != 0xFFFFFFFF) || (i == 7)) {
                 // Run the read test.
                 int result = SequentialRawReadTest(device, sizeInMb, blockSizeInKb, iop_io_buffer, fullpass, &crcErrorCount.value, &elapsedTimeMsecEE, &elapsedTimeMsecIOP.value);
 
@@ -467,8 +467,8 @@ void RunSequentialRawReadTest(u32 sizeInMb, u32 blockSizeInKb, int fullpass, int
 
                 // Print the results.
                 if (result == 0 || result == ATA_RES_ERR_ICRC) {
-                    scr_printf("\tUDMA %d: %d\tTime: %.2f%s - %.2fMB/%s\tCRC Errors: %d\tStatus: %s\n",
-                               i, udmaModeUsed, timeValueEE, timeUnits, transferSpeed, timeUnits, (u32)crcErrorCount.value, (crcErrorCount.value == 0 ? "PASSED" : "FAILED"));
+                    scr_printf("\tUDMA: %d\tTime: %.2f%s - %.2fMB/%s\tCRC Errors: %d\tStatus: %s\n",
+                               i, timeValueEE, timeUnits, transferSpeed, timeUnits, (u32)crcErrorCount.value, (crcErrorCount.value == 0 ? "PASSED" : "FAILED"));
                 } else {
                     // Get extended ATA error info.
                     fileXioDevctl(deviceString, ATA_DEVCTL_GET_ATA_ERROR, NULL, 0, &errorInfo, sizeof(errorInfo));
@@ -573,7 +573,7 @@ void RunRandomRawReadTest(u32 sizeInMb, u32 blockSizeInKb, int fullpass, int udm
             // Refresh the identify data so we can get an accurate UDMA speed.
             fileXioDevctl(deviceString, ATA_DEVCTL_IDENTIFY, NULL, 0, &ata_identify_data, sizeof(ata_identify_data));
             u32 udmaModeUsed = GetSelectedUDMAMode();
-            if (udmaModeUsed != 0xFFFFFFFF) {
+            if ((udmaModeUsed != 0xFFFFFFFF) || (i == 7)) {
                 // Run the read test.
                 int result = RandomRawReadTest(device, sizeInMb, blockSizeInKb, iop_io_buffer, fullpass, hddCapacityInSectors, &crcErrorCount.value, &elapsedTimeMsecEE, &elapsedTimeMsecIOP.value);
 
@@ -592,8 +592,8 @@ void RunRandomRawReadTest(u32 sizeInMb, u32 blockSizeInKb, int fullpass, int udm
 
                 // Print the results.
                 if (result == 0 || result == ATA_RES_ERR_ICRC) {
-                    scr_printf("\tUDMA %d: %d\tTime: %.2f%s - %.2fMB/%s\tCRC Errors: %d\tStatus: %s\n",
-                               i, udmaModeUsed, timeValueEE, timeUnits, transferSpeed, timeUnits, (u32)crcErrorCount.value, (crcErrorCount.value == 0 ? "PASSED" : "FAILED"));
+                    scr_printf("\tUDMA: %d\tTime: %.2f%s - %.2fMB/%s\tCRC Errors: %d\tStatus: %s\n",
+                               i, timeValueEE, timeUnits, transferSpeed, timeUnits, (u32)crcErrorCount.value, (crcErrorCount.value == 0 ? "PASSED" : "FAILED"));
                 } else {
                     // Get extended ATA error info.
                     fileXioDevctl(deviceString, ATA_DEVCTL_GET_ATA_ERROR, NULL, 0, &errorInfo, sizeof(errorInfo));
