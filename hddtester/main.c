@@ -435,7 +435,7 @@ void RunSequentialRawReadTest(u32 sizeInMb, u32 blockSizeInKb, int fullpass, int
 
     // Loop and try to perform the test on every UDMA mode requested.
     setMode.type = ATA_XFER_MODE_UDMA;
-    for (int i = udmaStart; i <= highestUDMAMode; i++) {
+    for (int i = udmaStart; i <= 7; i++) {
         if (i >= 0) {
             AlignedBlock crcErrorCount;
             u64 elapsedTimeMsecEE;
@@ -560,7 +560,7 @@ void RunRandomRawReadTest(u32 sizeInMb, u32 blockSizeInKb, int fullpass, int udm
 
     // Loop and try to perform the test on every UDMA mode requested.
     setMode.type = ATA_XFER_MODE_UDMA;
-    for (int i = udmaStart; i <= highestUDMAMode; i++) {
+    for (int i = udmaStart; i <= 7; i++) {
         if (i >= 0) {
             AlignedBlock crcErrorCount;
             u64 elapsedTimeMsecEE;
