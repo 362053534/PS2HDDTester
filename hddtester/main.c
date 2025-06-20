@@ -791,7 +791,7 @@ int main(int argc, char *argv[])
             }
             case SPEED_TEST_7: {
                 // Sequential raw read 64MB in 512kb blocks MDMA 0+ HDD->IOP
-                RunSequentialRawReadTest(64, 512, 0, -1, -1);
+                RunSequentialRawReadTest(256, 512, 0, -1, -1);
                 TestEndCommon();
                 break;
             }
