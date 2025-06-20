@@ -686,7 +686,7 @@ int main(int argc, char *argv[])
 
         // Print the banner message.
         scr_printf(" \n");
-        scr_printf("HDD Tester v1.1 dual\n\n");
+        scr_printf("HDD Tester v1.1 UDMA7\n\n");
 
         // Check the menu id and handle accordingly.
         switch (menu_id) {
