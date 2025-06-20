@@ -116,7 +116,7 @@ struct menu_option_info main_menu_options[] =
         {"#4 Random raw read 6MB UDMA4-7 HDD->IOP->EE", SPEED_TEST_4},
         {"#5 Sequential raw read 16MB MDMA0-UDMA7 HDD->IOP->EE", SPEED_TEST_5},
         {"#6 Random raw read 6MB MDMA0-UDMA7 HDD->IOP->EE", SPEED_TEST_6},
-        {"#7 Sequential raw read 512MB in 32/1024kb blocks UDMA4-7 HDD->IOP", SPEED_TEST_7},
+        {"#7 Sequential raw read 512MB UDMA4-7 HDD->IOP", SPEED_TEST_7},
 };
 static int main_menu_option_count = sizeof(main_menu_options) / sizeof(struct menu_option_info);
 
@@ -753,6 +753,7 @@ int main(int argc, char *argv[])
                 RunSequentialRawReadTest(64, 4, fullPass, 4, -1);
                 RunSequentialRawReadTest(64, 16, fullPass, 4, -1);
                 RunSequentialRawReadTest(64, 32, fullPass, 4, -1);
+                RunSequentialRawReadTest(64, 1024, fullPass, 4, -1);
 
                 // Print return message and handle input.
                 TestEndCommon();
@@ -766,6 +767,7 @@ int main(int argc, char *argv[])
                 RunRandomRawReadTest(6, 4, fullPass, 4, -1);
                 RunRandomRawReadTest(6, 16, fullPass, 4, -1);
                 RunRandomRawReadTest(6, 32, fullPass, 4, -1);
+                RunRandomRawReadTest(6, 1024, fullPass, 4, -1);
 
                 // Print return message and handle input.
                 TestEndCommon();
@@ -777,6 +779,7 @@ int main(int argc, char *argv[])
                 RunSequentialRawReadTest(16, 4, 1, -1, -1);
                 RunSequentialRawReadTest(16, 16, 1, -1, -1);
                 RunSequentialRawReadTest(16, 32, 1, -1, -1);
+                RunSequentialRawReadTest(16, 1024, 1, -1, -1);
                 TestEndCommon();
                 break;
             }
@@ -786,13 +789,14 @@ int main(int argc, char *argv[])
                 RunRandomRawReadTest(6, 4, 1, -1, -1);
                 RunRandomRawReadTest(6, 16, 1, -1, -1);
                 RunRandomRawReadTest(6, 32, 1, -1, -1);
+                RunRandomRawReadTest(6, 1024, 1, -1, -1);
                 TestEndCommon();
                 break;
             }
             case SPEED_TEST_7: {
                 // Sequential raw read 512MB in 512kb blocks MDMA 0+ HDD->IOP
+                RunSequentialRawReadTest(512, 512, 0, 4, -1);
                 RunSequentialRawReadTest(512, 1024, 0, 4, -1);
-                RunSequentialRawReadTest(512, 32, 0, 4, -1);
                 TestEndCommon();
                 break;
             }
