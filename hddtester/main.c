@@ -111,12 +111,12 @@ struct menu_option_info
 struct menu_option_info main_menu_options[] =
     {
         {"#1 Sequential raw read 64MB UDMA4-7 HDD->IOP", SPEED_TEST_1},
-        {"#2 Sequential raw read 64MB UDMA4-7 HDD->IOP->EE", SPEED_TEST_2},
-        {"#3 Random raw read 6MB UDMA4-7 HDD->IOP", SPEED_TEST_3},
-        {"#4 Random raw read 6MB UDMA4-7 HDD->IOP->EE", SPEED_TEST_4},
+        //{"#2 Sequential raw read 64MB UDMA4-7 HDD->IOP->EE", SPEED_TEST_2},
+        {"#3 Random raw read 6MB UDMA4-7 HDD->IOP", SPEED_TEST_2},
+        //{"#4 Random raw read 6MB UDMA4-7 HDD->IOP->EE", SPEED_TEST_4},
         //{"#5 Sequential raw read 16MB MDMA0-UDMA7 HDD->IOP->EE", SPEED_TEST_5},
         //{"#6 Random raw read 6MB MDMA0-UDMA7 HDD->IOP->EE", SPEED_TEST_6},
-        {"#5 Sequential raw read 512MB UDMA4-7 HDD->IOP", SPEED_TEST_5},
+        {"#5 Sequential raw read 512MB UDMA4-7 HDD->IOP", SPEED_TEST_3},
 };
 static int main_menu_option_count = sizeof(main_menu_options) / sizeof(struct menu_option_info);
 
@@ -745,32 +745,32 @@ int main(int argc, char *argv[])
                 }
                 break;
             }
-            case SPEED_TEST_1:
-            case SPEED_TEST_2: {
-                // Sequential raw read 64MB UDMA 4+
-                int fullPass = menu_id == SPEED_TEST_2 ? 1 : 0;
-                RunSequentialRawReadTest(64, 4, fullPass, 4, -1);
-                RunSequentialRawReadTest(64, 16, fullPass, 4, -1);
-                RunSequentialRawReadTest(64, 32, fullPass, 4, -1);
-                RunSequentialRawReadTest(64, 512, fullPass, 4, -1);
+            //case SPEED_TEST_1:
+            //case SPEED_TEST_2: {
+            //    // Sequential raw read 64MB UDMA 4+
+            //    int fullPass = menu_id == SPEED_TEST_2 ? 1 : 0;
+            //    RunSequentialRawReadTest(64, 4, fullPass, 4, -1);
+            //    RunSequentialRawReadTest(64, 16, fullPass, 4, -1);
+            //    RunSequentialRawReadTest(64, 32, fullPass, 4, -1);
+            //    RunSequentialRawReadTest(64, 512, fullPass, 4, -1);
 
-                // Print return message and handle input.
-                TestEndCommon();
-                break;
-            }
-            case SPEED_TEST_3:
-            case SPEED_TEST_4: {
-                // Random raw read 6MB UDMA 4+
-                int fullPass = menu_id == SPEED_TEST_4 ? 1 : 0;
-                RunRandomRawReadTest(6, 4, fullPass, 4, -1);
-                RunRandomRawReadTest(6, 16, fullPass, 4, -1);
-                RunRandomRawReadTest(6, 32, fullPass, 4, -1);
-                RunRandomRawReadTest(6, 256, fullPass, 4, -1);
+            //    // Print return message and handle input.
+            //    TestEndCommon();
+            //    break;
+            //}
+            //case SPEED_TEST_3:
+            //case SPEED_TEST_4: {
+            //    // Random raw read 6MB UDMA 4+
+            //    int fullPass = menu_id == SPEED_TEST_4 ? 1 : 0;
+            //    RunRandomRawReadTest(32, 4, fullPass, 4, -1);
+            //    RunRandomRawReadTest(32, 16, fullPass, 4, -1);
+            //    RunRandomRawReadTest(32, 32, fullPass, 4, -1);
+            //    RunRandomRawReadTest(32, 512, fullPass, 4, -1);
 
-                // Print return message and handle input.
-                TestEndCommon();
-                break;
-            }
+            //    // Print return message and handle input.
+            //    TestEndCommon();
+            //    break;
+            //}
             //case SPEED_TEST_5: {
             //    // Sequential raw read 16MB MDMA0+ HDD->IOP->EE
             //    RunSequentialRawReadTest(16, 2, 1, -1, -1);
@@ -789,9 +789,39 @@ int main(int argc, char *argv[])
             //    TestEndCommon();
             //    break;
             //}
-            case SPEED_TEST_5: {
+            //case SPEED_TEST_7: {
+            //    // Sequential raw read 512MB in 1024kb blocks MDMA 0+ HDD->IOP
+            //    RunSequentialRawReadTest(512, 1024, 0, 4, -1);
+            //    RunSequentialRawReadTest(64, 1024, 0, 4, -1);
+            //    TestEndCommon();
+            //    break;
+            //}
+            case SPEED_TEST_1: {
+                // Sequential raw read 64MB UDMA 4+
+                RunSequentialRawReadTest(64, 4, 0, 4, -1);
+                RunSequentialRawReadTest(64, 16, 0, 4, -1);
+                RunSequentialRawReadTest(64, 32, 0, 4, -1);
+                RunSequentialRawReadTest(64, 512, 0, 4, -1);
+
+                // Print return message and handle input.
+                TestEndCommon();
+                break;
+            }
+            case SPEED_TEST_2: {
+                // Random raw read 32MB UDMA 4+
+                RunRandomRawReadTest(32, 4, 0, 4, -1);
+                RunRandomRawReadTest(32, 16, 0, 4, -1);
+                RunRandomRawReadTest(32, 32, 0, 4, -1);
+                RunRandomRawReadTest(32, 512, 0, 4, -1);
+
+                // Print return message and handle input.
+                TestEndCommon();
+                break;
+            }
+            case SPEED_TEST_3: {
                 // Sequential raw read 512MB in 1024kb blocks MDMA 0+ HDD->IOP
                 RunSequentialRawReadTest(512, 1024, 0, 4, -1);
+                RunSequentialRawReadTest(64, 1024, 0, 4, -1);
                 TestEndCommon();
                 break;
             }
