@@ -110,13 +110,13 @@ struct menu_option_info
 // Main menu options:
 struct menu_option_info main_menu_options[] =
     {
-        {"#1 Sequential raw read 64MB UDMA4+ HDD->IOP", SPEED_TEST_1},
-        {"#2 Sequential raw read 64MB UDMA4+ HDD->IOP->EE", SPEED_TEST_2},
-        {"#3 Random raw read 6MB UDMA4+ HDD->IOP", SPEED_TEST_3},
-        {"#4 Random raw read 6MB UDMA4+ HDD->IOP->EE", SPEED_TEST_4},
-        {"#5 Sequential raw read 16MB MDMA0+ HDD->IOP->EE", SPEED_TEST_5},
-        {"#6 Random raw read 6MB MDMA0+ HDD->IOP->EE", SPEED_TEST_6},
-        {"#7 Sequential raw read 64MB in 512kb blocks MDMA0+ HDD->IOP", SPEED_TEST_7},
+        {"#1 Sequential raw read 64MB UDMA4-7 HDD->IOP", SPEED_TEST_1},
+        {"#2 Sequential raw read 64MB UDMA4-7 HDD->IOP->EE", SPEED_TEST_2},
+        {"#3 Random raw read 6MB UDMA4-7 HDD->IOP", SPEED_TEST_3},
+        {"#4 Random raw read 6MB UDMA4-7 HDD->IOP->EE", SPEED_TEST_4},
+        {"#5 Sequential raw read 16MB MDMA0-UDMA7 HDD->IOP->EE", SPEED_TEST_5},
+        {"#6 Random raw read 6MB MDMA0-UDMA7 HDD->IOP->EE", SPEED_TEST_6},
+        {"#7 Sequential raw read 64MB in 512kb blocks MDMA0-UDMA7 HDD->IOP", SPEED_TEST_7},
 };
 static int main_menu_option_count = sizeof(main_menu_options) / sizeof(struct menu_option_info);
 
@@ -416,8 +416,8 @@ void RunSequentialRawReadTest(u32 sizeInMb, u32 blockSizeInKb, int fullpass, int
 
                 // Print the results.
                 if (result == 0 || result == ATA_RES_ERR_ICRC) {
-                    scr_printf("\tMDMA %d: %d\tTime: %.2f%s - %.2fMB/%s\tCRC Errors: %d\tStatus: %s\n",
-                               i, mdmaModeUsed, timeValueEE, timeUnits, transferSpeed, timeUnits, (u32)crcErrorCount.value, (crcErrorCount.value == 0 ? "PASSED" : "FAILED"));
+                    scr_printf("\tMDMA: %d\tTime: %.2f%s - %.2fMB/%s\tCRC Errors: %d\tStatus: %s\n",
+                               i, timeValueEE, timeUnits, transferSpeed, timeUnits, (u32)crcErrorCount.value, (crcErrorCount.value == 0 ? "PASSED" : "FAILED"));
                 } else {
                     // Get extended ATA error info.
                     fileXioDevctl(deviceString, ATA_DEVCTL_GET_ATA_ERROR, NULL, 0, &errorInfo, sizeof(errorInfo));
@@ -541,8 +541,8 @@ void RunRandomRawReadTest(u32 sizeInMb, u32 blockSizeInKb, int fullpass, int udm
 
                 // Print the results.
                 if (result == 0 || result == ATA_RES_ERR_ICRC) {
-                    scr_printf("\tMDMA %d: %d\tTime: %.2f%s - %.2fMB/%s\tCRC Errors: %d\tStatus: %s\n",
-                               i, mdmaModeUsed, timeValueEE, timeUnits, transferSpeed, timeUnits, (u32)crcErrorCount.value, (crcErrorCount.value == 0 ? "PASSED" : "FAILED"));
+                    scr_printf("\tMDMA: %d\tTime: %.2f%s - %.2fMB/%s\tCRC Errors: %d\tStatus: %s\n",
+                               i, timeValueEE, timeUnits, transferSpeed, timeUnits, (u32)crcErrorCount.value, (crcErrorCount.value == 0 ? "PASSED" : "FAILED"));
                 } else {
                     // Get extended ATA error info.
                     fileXioDevctl(deviceString, ATA_DEVCTL_GET_ATA_ERROR, NULL, 0, &errorInfo, sizeof(errorInfo));
