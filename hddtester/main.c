@@ -172,7 +172,7 @@ void LoadIOPModules()
 u32 GetHighestUDMAMode()
 {
     // Check the highest UDMA mode supported.
-    for (int i = 6; i >= 0; i--) {
+    for (int i = 7; i >= 0; i--) {
         // Check if the current UDMA mode is supported.
         if ((ata_identify_data.UltraDMASupport & (1 << i)) != 0)
             return i;
@@ -184,7 +184,7 @@ u32 GetHighestUDMAMode()
 u32 GetSelectedUDMAMode()
 {
     // Check the highest UDMA mode selected.
-    for (int i = 6; i >= 0; i--) {
+    for (int i = 7; i >= 0; i--) {
         // Check if the current UDMA mode is selected.
         if ((ata_identify_data.UltraDMAActive & (1 << i)) != 0)
             return i;
