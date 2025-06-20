@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/ps2homebrew/ps2homebrew:main
+      image: ghcr.io/ps2homebrew/ps2homebrew@sha256:4363345d88606ee2b9e6aebaddef832f68e6ab5a5ceb488fe981d1594f98fb2e
     steps:
     - name: git checkout
       uses: actions/checkout@v4
