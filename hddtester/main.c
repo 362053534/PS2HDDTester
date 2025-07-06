@@ -110,13 +110,13 @@ struct menu_option_info
 // Main menu options:
 struct menu_option_info main_menu_options[] =
     {
-        {"#1 Sequential raw read 64MB UDMA4-7 HDD->IOP", SPEED_TEST_1},
+        {"#1 顺序读取 64MB UDMA4-7 HDD->IOP", SPEED_TEST_1},
         //{"#2 Sequential raw read 64MB UDMA4-7 HDD->IOP->EE", SPEED_TEST_2},
-        {"#2 Random raw read 16MB UDMA4-7 HDD->IOP", SPEED_TEST_2},
+        {"#2 随机读取 16MB UDMA4-7 HDD->IOP", SPEED_TEST_2},
         //{"#4 Random raw read 6MB UDMA4-7 HDD->IOP->EE", SPEED_TEST_4},
         //{"#5 Sequential raw read 16MB MDMA0-UDMA7 HDD->IOP->EE", SPEED_TEST_5},
         //{"#6 Random raw read 6MB MDMA0-UDMA7 HDD->IOP->EE", SPEED_TEST_6},
-        {"#3 Sequential raw read 256MB UDMA4-7 HDD->IOP", SPEED_TEST_3},
+        {"#3 顺序读取大文件 256MB UDMA4-7 HDD->IOP", SPEED_TEST_3},
 };
 static int main_menu_option_count = sizeof(main_menu_options) / sizeof(struct menu_option_info);
 
